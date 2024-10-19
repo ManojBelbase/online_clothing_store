@@ -68,7 +68,7 @@ export const getAllProducts = async (req, res) => {
     }
     res
       .status(200)
-      .json({ message: "Blogs fetch successfully", data: products });
+      .json({ message: "Product fetch successfully", data: products });
   } catch (error) {
     res.status(500).json({ success: false, message: "Internal server error" });
   }
