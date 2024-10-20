@@ -38,3 +38,30 @@ export const createUser = async (req, res) => {
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
+
+// login user
+
+export const loginUser = async (req, res) => {
+  try {
+    let user = await User.findOne({ email: req.body.email });
+    if (user) {
+      let passCompare = req.body.password === user.password;
+
+      if (passCompare) {
+        const data = {
+          user: {
+            id: user.id,
+          },
+        };
+        const token = jwt.sign(data, process.env.JWT_SECRET_KEY);
+        res.json({ success: true, token, user });
+      } else {
+        res.json({ errors: "Password doesnot match" });
+      }
+    } else {
+      res.json({ errors: "Email doesnot match" });
+    }
+  } catch (error) {
+    res.status(500).json({ success: false, errors: "Internal server error" });
+  }
+};
