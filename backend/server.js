@@ -4,6 +4,7 @@ import cors from "cors";
 import upload from "./middleware/multer.js"; // Multer middleware for file uploads
 import connectDB from "./db.js"; // Database connection
 import productRoute from "./Routes/product.route.js";
+import userRoute from "./Routes/user.route.js";
 
 dotenv.config();
 
@@ -34,6 +35,7 @@ app.post("/upload", upload.single("product"), (req, res) => {
 
 // Use the product routes
 app.use("/api", productRoute);
+app.use("/api", userRoute);
 
 // Start the server
 app.listen(PORT, () => {

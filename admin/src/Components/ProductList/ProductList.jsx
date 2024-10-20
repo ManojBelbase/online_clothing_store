@@ -20,7 +20,7 @@ const ProductList = () => {
       },
       body: JSON.stringify({ id: id }),
     });
-    fetchData();
+    await fetchData();
   };
 
   useEffect(() => {
