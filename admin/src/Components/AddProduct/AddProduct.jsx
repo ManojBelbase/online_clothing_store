@@ -1,6 +1,7 @@
 import { data } from "@remix-run/router";
 import React, { useState } from "react";
 import { BsCloudUpload } from "react-icons/bs";
+
 const AddProduct = () => {
   const [image, setImage] = useState(false);
   const [productDetails, setProductDetails] = useState({
@@ -15,13 +16,11 @@ const AddProduct = () => {
     setImage(e.target.files[0]);
   };
 
-  //   // Handle form input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setProductDetails({ ...productDetails, [name]: value });
   };
 
-  // handle submit
   const handleSubmit = async () => {
     let responseData;
     let product = productDetails;
@@ -55,7 +54,21 @@ const AddProduct = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          data.success ? alert("product added") : alert("failed");
+          if (data.success) {
+            alert("Product added successfully!");
+
+            // Reset the form
+            setProductDetails({
+              name: "",
+              image: "",
+              category: "",
+              new_price: "",
+              old_price: "",
+            });
+            setImage(false);
+          } else {
+            alert("Failed to add product");
+          }
         });
     }
   };
@@ -115,7 +128,7 @@ const AddProduct = () => {
           <option value="">Select Category</option>
           <option value="men">Men</option>
           <option value="women">Women</option>
-          <option value="kids">Kids</option>
+          <option value="kid">Kid</option>
         </select>
       </div>
       <div className="px-4 py-2">
@@ -138,7 +151,6 @@ const AddProduct = () => {
           <input
             type="file"
             name="image"
-            value={productDetails.image}
             accept="image/*"
             onChange={handleImageChange}
           />
@@ -146,7 +158,7 @@ const AddProduct = () => {
       </div>
       <div className="px-4 py-2">
         <button
-          onClick={() => handleSubmit()}
+          onClick={handleSubmit}
           className="px-4 py-1 bg-[#ffb929] text-white rounded-sm"
         >
           Add

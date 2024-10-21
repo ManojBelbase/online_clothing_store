@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Item from "../item/Item";
-import new_collections from "../../assets/new_collections.js";
+// import new_collections from "../../assets/new_collections.js";
+import { useState } from "react";
 const Collections = () => {
+  const [new_collections, setNew_Collections] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:4000/api/new-collection")
+      .then((res) => res.json())
+      .then((data) => setNew_Collections(data.newcollection || []));
+  }, []);
+  console.log(new_collections);
   return (
     <div className="px-2 md:px-20 py-4">
       <h1 className="text-center md:text-4xl font-semibold uppercase relative mb-5 md:mb-10">

@@ -9,7 +9,7 @@ export const createUser = async (req, res) => {
     if (check) {
       return res
         .status(400)
-        .json({ success: false, error: "This email is already exist" });
+        .json({ success: false, errors: "This email is already exist" });
     }
 
     let Cart = {};

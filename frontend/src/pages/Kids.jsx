@@ -8,7 +8,7 @@ const Kids = ({ banner, category }) => {
     <div className="px-2 md:px-20 py-6">
       <div className="flex flex-col gap-4">
         <div>
-          <img src={banner} alt="" />
+          <img src={banner} alt="banner" />
         </div>
         <div className="flex items-center justify-between">
           <p>

@@ -3,6 +3,7 @@ import { ShopContext } from "../context/shopContext";
 import Item from "../components/item/Item";
 const Mens = ({ banner, category }) => {
   const { all_products } = useContext(ShopContext);
+  console.log(all_products);
 
   return (
     <div className="px-2 md:px-20 py-6">

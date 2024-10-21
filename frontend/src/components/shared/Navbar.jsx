@@ -77,12 +77,25 @@ const Navbar = () => {
 
         {/* Cart / Login (Hidden on mobile view) */}
         <div className="hidden md:flex items-center gap-6">
-          <Link
-            to="/login"
-            className="px-5 py-2 border border-black hover:border-[#ffb929] text-sm uppercase font-normal rounded-full hover:text-[#ffb929]"
-          >
-            Login
-          </Link>
+          {localStorage.getItem("auth-token") ? (
+            <button
+              onClick={() => {
+                localStorage.removeItem("auth-token");
+                window.location.replace("/");
+              }}
+              className="px-5 py-2 border border-black hover:border-red-500 text-sm uppercase font-normal rounded-full hover:text-red-500"
+            >
+              Logout
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              className="px-5 py-2 border border-black hover:border-[#ffb929] text-sm uppercase font-normal rounded-full hover:text-[#ffb929]"
+            >
+              Login
+            </Link>
+          )}
+
           {/* Cart */}
           <Link to="/cart" className="relative">
             <PiShoppingCart className="text-3xl font-semibold cursor-pointer" />
